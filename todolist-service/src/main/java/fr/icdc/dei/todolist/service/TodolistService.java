@@ -19,4 +19,6 @@ public interface TodolistService {
 
 	List<TaskStatus> listTaskStatus();
 
+	void finishTask(Task task);
+
 }

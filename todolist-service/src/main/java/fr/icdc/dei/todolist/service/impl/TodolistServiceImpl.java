@@ -82,4 +82,10 @@ public class TodolistServiceImpl implements TodolistService {
 	public List<TaskStatus> listTaskStatus() {
 		return taskStatusDao.findAll();
 	}
+
+	@Override
+	public void finishTask(Task task) {
+		task.setStatus(new TaskStatus(2));
+		taskDao.save(task);
+	}
 }
