@@ -1,0 +1,7 @@
+.metadata/*
+RemoteSystemsTempFiles/*
+Servers/*
+/target
+todolist-persistence/.settings/*
+todolist-presentation/.settings/*
+todolist-service/.settings/*

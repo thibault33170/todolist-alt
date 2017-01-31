@@ -48,9 +48,8 @@ public class TodolistController {
 	}
 	
 	@RequestMapping(value = "finish", method=RequestMethod.POST)
-	public ModelAndView finishTask(@RequestParam Task task) {
-		todolistService.finishTask(task);
-		//redirect to home
-		return null;
+	public String finishTask(@RequestParam int taskId) {
+		todolistService.finishTask(taskId);
+		return "redirect:/";
 	}
 }
