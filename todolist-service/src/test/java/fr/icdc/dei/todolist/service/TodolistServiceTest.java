@@ -3,12 +3,16 @@ package fr.icdc.dei.todolist.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
+import java.sql.Date;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.icdc.dei.todolist.persistence.entity.Task;
+import fr.icdc.dei.todolist.persistence.entity.TaskStatus;
 import fr.icdc.dei.todolist.persistence.entity.User;
 import fr.icdc.dei.todolist.service.enums.TaskStatusEnum;
 
@@ -21,6 +25,8 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	
 	private static User user = new User();
 	private static Task task = new Task();
+	private static TaskStatus taskStatus = new TaskStatus(1);
+	private static Calendar cal = Calendar.getInstance();
 	
 	@Autowired
 	private TodolistService todolistService;
@@ -29,6 +35,9 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	public static void setUp() {
 		user.setId(USER_ID);
 		task.setId(TASK_TO_AFFECT_ID);
+		cal.add(Calendar.DATE, -15);
+		task.setBeginDate(new Date(2017-01-01));
+		task.setStatus(taskStatus);
 	}
 	
 	@Test
@@ -60,5 +69,14 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	public void testListTaskStatus() {
 		assertTrue(CollectionUtils.isNotEmpty(todolistService.listTaskStatus()));
 	}
-
+	
+	@Test
+	public void testTaskIsFinished() {
+		assertTrue(todolistService.isFinished(task));
+	}
+	
+	@Test
+	public void testSetStatusFinished() {
+		assertEquals(todolistService.finishTask(task.getId()).getStatus().getId(),2);
+	}
 }

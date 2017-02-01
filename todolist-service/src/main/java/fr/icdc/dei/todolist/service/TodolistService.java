@@ -21,6 +21,6 @@ public interface TodolistService {
 	
 	boolean isFinished(Task task);
 
-	void finishTask(long taskId);
+	Task finishTask(long taskId);
 
 }

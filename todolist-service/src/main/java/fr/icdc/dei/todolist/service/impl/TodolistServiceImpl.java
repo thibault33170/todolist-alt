@@ -84,18 +84,20 @@ public class TodolistServiceImpl implements TodolistService {
 	}
 
 	@Override
-	public void finishTask(long taskId) {
+	public Task finishTask(long taskId) {
 		Task task = taskDao.findOne(taskId);
 		if (isFinished(task)) {
 			task.setStatus(new TaskStatus(2));
 			taskDao.save(task);	
+			System.out.println(task);
 		}
+		return task;
 	}
 
 	@Override
 	public boolean isFinished(Task task) {
 		Calendar cal = Calendar.getInstance(); 
 		cal.add(Calendar.DATE, -7);
-		return task.getClosedDate().before(cal.getTime());
+		return task.getBeginDate().before(cal.getTime());
 	}
 }

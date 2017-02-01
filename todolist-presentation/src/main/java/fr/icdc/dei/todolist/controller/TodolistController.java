@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.icdc.dei.todolist.persistence.entity.Task;
-import fr.icdc.dei.todolist.persistence.entity.TaskStatus;
 import fr.icdc.dei.todolist.service.TodolistService;
 
 @Controller
@@ -28,7 +26,11 @@ public class TodolistController {
 	public ModelAndView home() {
 		ModelAndView page = new ModelAndView("Home");
 	
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		 
 		page.addObject(TASKS_HTTP_ATTR, todolistService.listTasks());
+		page.addObject("now", dateFormat.format(date));
 		return page;
 	}
 	

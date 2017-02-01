@@ -11,7 +11,9 @@
  	<span>${task.name} - ${task.status.name}</span>
     	<form action="/todolist-presentation/finish" method="POST">
 			<input type="hidden" name="taskId" value="${task.id}"/>
-			<input type="submit" value="Terminer la tâche" />
+			<c:if test="${task.status.id==1}">
+				<input type="submit" value="Terminer la tâche" />
+			</c:if>
 		</form> 
 	</c:forEach>
 </body>
